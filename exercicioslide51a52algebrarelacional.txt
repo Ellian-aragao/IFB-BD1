@@ -1,0 +1,64 @@
+5)
+{t.nome,t.especialidade | Médico(t)}
+6)
+{a.numeroA | Ambulatório(a) 
+         AND a.andar = 3
+}
+7)
+{c.CRM,C.data | Consulta(c) 
+            AND (c.RG = 122 OR c.rg = 725)
+}
+8)
+{a.numeroA | Ambulatório(a) 
+         AND (NOT ((c.andar = 2 
+                 OR c.andar = 4) 
+         AND c.capacidade >= 50))
+}
+9)
+{m.nome,c.data | Medico(m) 
+             AND Consulta(c) 
+             AND m.CRM = c.CRM
+}
+10)
+{a.numeroA , a.capacidade, m.nome | Ambulatório(a) 
+                                AND Medico(m) 
+                                AND m.numeroA = a.numeroA 
+                                AND a.andar = 5
+}
+11)
+{m.nome, Medico(m) 
+            AND m.especialidade = "ortopedista" 
+            AND ((∃c)(Consulta(c) 
+            AND c.CRM = m.CRM 
+            AND c.hora => 7 
+            AND c.hora <= 12 
+            AND c.data = 15/04/2003)
+}
+12)
+{ p.nome | Paciente(p)
+       AND p.doenca = "pneumonia"
+       AND ((∃c)(Consulta(c)
+       AND p.RG = c.RG
+       AND ((∃m)(Medico(m)
+       AND c.CRM = m.CRM
+       AND m.nome = "João Carlos Santos"))))
+}
+13)
+{ f.RG, f.nome | Funcionários(f) 
+             AND f.salário < 300,00 
+             AND (NOT (∃p)(Paciente(p) 
+             AND f.RG = p.RG))
+}
+14)
+{ a.numeroA | Ambulatório(a) 
+          AND (NOT (∃m)(Médico(m) 
+          AND a.numeroA = m.numeroA))}
+15)
+{ f.nome, f.RG | Funcionário(f) 
+             AND ((∃p)(Paciente(p) 
+             AND f.RG = p.RG))}
+16)
+{ m.nome | Médico(m) 
+       AND (NOT (∃c)(Consulta(c)      
+       AND m.CRM = c.CRM))
+}

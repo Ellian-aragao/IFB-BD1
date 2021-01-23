@@ -1,0 +1,44 @@
+---------------------------------------------------
+A)
+π nome, fone (
+  σ [Consultas.COD_AN = 654] (
+    Θ [Veterinários.CRMV = Consultas.CRMV] (
+      Veterinários, Consultas
+    )
+  )
+)
+---------------------------------------------------
+B)
+π Animais.nome (
+  σ [Veterinários.nome = "Pedro Saúl de Lima" ∧ DATA_hora > "01/01/2017"] (
+    Θ [Veterinários.CRMV = Consultas.CRMV] (
+      Veterinários,
+      Θ [Consultas.COD_AN = Animais.COD_AN] (
+        Consultas, Animais
+      )
+    )
+  )
+) ∩ π Animais.nome (
+  σ [Veterinários.nome = "Carlos Krank"] (
+    Θ [Veterinários.CRMV = Consultas.CRMV] (
+      Veterinários,
+      Θ [Consultas.COD_AN = Animais.COD_AN] (
+        Consultas, Animais
+      )
+    )
+  )
+)
+---------------------------------------------------
+C)
+π nome (
+  σ [cod_prop =
+    π cod_prop (
+      σ [COD_AN = 21] (
+        Animais
+      )
+    )
+  ](
+    Animais
+  )
+)
+---------------------------------------------------

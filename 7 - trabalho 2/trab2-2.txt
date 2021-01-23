@@ -1,0 +1,99 @@
+------------------------------------------------------------
+a)
+SELECT nome,
+       endereco
+  FROM Proprietários
+  WHERE cidade = "Itatiba"
+UNION
+SELECT nome,
+       endereco
+  FROM Veterinários
+  WHERE cidade = "Itatiba";
+-----------------------------------------------------------
+b)
+SELECT A.COD_AN,
+       A.nome,
+       V.CRMV,
+       V.nome,
+       C.data_hora,
+       C.valor
+  FROM Consultas AS C
+    INNER JOIN Animais AS A ON C.COD_AN = A.COD_AN
+    INNER JOIN Veterinários AS V ON C.CRMV = V.CRMV
+  WHERE C.data_hora < "2010-05-01";
+-----------------------------------------------------------
+c)
+SELECT A.COD_AN,
+       A.nome
+  FROM Animais AS A
+    INNER JOIN Exames AS E ON A.COD_AN = E.COD_AN
+  WHERE A.DATA > "2010-01-01";
+------------------------------------------------------------
+d)
+SELECT V.CRMV,
+       V.nome
+  FROM Veterinários AS V
+    INNER JOIN Consultas AS C ON V.CRMV = C.CRMV
+  WHERE C.data_hora >= "2010-05-01"
+    AND C.data_hora <= "2010-05-31"
+  GROUP BY V.CRMV,
+           V.nome
+  HAVING sum(C.valor) > 10000;
+------------------------------------------------------------
+e)
+SELECT nome
+FROM Animais AS A
+    INNER JOIN Exames AS E ON A.COD_AN = E.COD_AN
+GROUP BY A.nome
+HAVING sum(custo) >= all(
+  SELECT sum(custo)
+  FROM Exames AS E
+    INNER JOIN Animais AS A ON E.COD_AN = A.COD_AN
+  GROUP BY A.nome
+);
+------------------------------------------------------------
+f)
+SELECT A.nome
+FROM Animais AS A
+WHERE NOT EXISTS (
+  SELECT CRMV
+  FROM Veterinários
+  WHERE cidade = "Prinópolis"
+    AND CRMV NOT IN (
+      SELECT CRMV
+      FROM Consultas AS C
+        INNER JOIN Animais ON C.COD_AN = Animais.COD_AN
+    )
+);
+------------------------------------------------------------
+g)
+DELETE FROM Animais AS A
+  INNER JOIN Proprietários AS P ON P.COD_PROP = A.COD_PROP
+  WHERE P.nome = "Renato Sencão";
+
+DELETE FROM Proprietários AS P
+ WHERE P.nome = "Renato Sencão";
+------------------------------------------------------------
+h)
+UPDATE Exames SET custo = custo * 0.95
+WHERE `DATA` >= "2017-05-01"
+  AND custo <= 50;
+
+UPDATE Exames SET custo = custo * 0.93
+WHERE `DATA` >= "2017-05-01"
+  AND custo > 50;
+------------------------------------------------------------
+i)
+INSERT INTO Animais VALUES (
+  150,
+  "Sultão",
+  "Canino"
+  NULL,
+  123
+);
+INSERT INTO Consultas VALUES (
+  020,
+  150,
+  "2017-06-10 14:00",
+  150.00
+);

@@ -1,0 +1,62 @@
+1)
+
+1FN:
+Turmas (codigo_turma, codigo_curso, nome_curso, carga_horaria, data_inicio, horario, local, valor, codigo_prof, nome_prof, endereco_prof, fone_prof);
+Matriculas (codigo_turma, codigo_aluno, nome_aluno, endereco_aluno, fone_aluno, frequencia, nota);
+
+2FN:
+Turmas (codigo_turma, codigo_curso, nome_curso, carga_horaria, data_inicio, horario, local, valor, codigo_prof, nome_prof, endereco_prof, fone_prof);
+Alunos (codigo, nome, endereco, fone);
+Matriculas (codigo_turma, codigo_aluno, frequencia, nota);
+
+3FN:
+Turmas (codigo, data_inicio, horário, local);
+Cursos (codigo, nome, carga_horaria, valor);
+Professores (codigo, endereço, fone);
+Alunos (codigo, nome, endereco, fone);
+Matriculas (codigo_turma, codigo_aluno, frequencia, nota);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+2)
+
+1FN:
+Livros (no_tombo, titulo, editora, edição, ano_publicacao, codigo_fornecedor, nome_fornecedor, fone_fornecedor);
+Autores (no_tombo, nome);
+Usuarios (codigo, nome, endereço, cidade, fone);
+Emprestimos (no_tombo, codigo_usuario, data_retirada, data_devolucao);
+
+3FN:
+Fornecedores (codigo_fornecedor, nome_fornecedor, fone_fornecedor);
+Livros (no_tombo, titulo, editora, edição, ano_publicacao, codigo_fornecedor);
+Autores (no_tombo, nome);
+Usuarios (codigo, nome, endereço, cidade, fone);
+Emprestimos (no_tombo, codigo_usuario, data_retirada, data_devolucao);
+
+4FN:
+Fornecedores (codigo_fornecedor, nome_fornecedor, fone_fornecedor);
+Livros (no_tombo, titulo, editora, edição, ano_publicacao, codigo_fornecedor);
+Autores (codigo, nome);
+Escrever (no_tombo, codigo_autor);
+Usuarios (codigo, nome, endereço, cidade, fone);
+Emprestimos (no_tombo, codigo_usuario, data_retirada, data_devolucao);
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+3)
+
+1FN:
+Locacoes: (contrato, data_locacao, prazo, valor, tipo_reajuste, codigo_imovel, endereco_imovel, descricao_imovel, codigo_locador, nome_locador, fone_locador, codigo_locatario, nome_locatario, fone_locatario, profissao_locatario, renda_locatario);
+Fiadores: (contrato, codigo, nome, fone, fone, renda);
+
+2FN:
+Locacoes: (contrato, data_locacao, prazo, valor, tipo_reajuste, codigo_imovel, endereco_imovel, descricao_imovel, codigo_locador, nome_locador, fone_locador, codigo_locatario, nome_locatario, fone_locatario, profissao_locatario, renda_locatario);
+Fiadores: (codigo, nome, fone, fone, renda);
+LocacaoFiadores: (contrato, codigo);
+
+3FN:
+Imoveis: (codigo, endereco, descricao);
+Locador: (codigo, nome, fone);
+Locatario: (codigo, nome, fone, profissao, renda);
+Locacoes: (contrato, data_locacao, prazo, valor, tipo_reajuste, codigo_imovel, codigo_locador, codigo_locatario);
+Fiadores: (codigo, nome, fone, fone, renda);
+LocacaoFiadores: (contrato, codigo);
+
